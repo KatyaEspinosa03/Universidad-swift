@@ -22,10 +22,19 @@ struct Universidad {
         
     }
     
-    func studentClass(salon: String) -> [Students] {
-        return []
+    mutating func removeStudents(student: Students){
+        studentsArray.remove(at: 0)
     }
-}
+    
+    /* func getStudentClass(student: Students) -> [Students] {
+
+        let studentClass = studentsArray.map{$0.salon}
+        
+        } */
+    
+    
+    }
+
 
 var University = Universidad(studentsArray: [])
 
@@ -46,10 +55,10 @@ University.students(student: alumno3)
 
 var alumno4 = Students(nombreCompleto: "Sonia Rodriguez", edad: 17, grado: 3, salon: "B", telefono: 559834565, promedioGeneral: 9.5)
 
-University.students(student: alumno4)
 
-print(University.studentsArray[0])
 
-University.studentClass(salon: "A")
+University.removeStudents(student: alumno1)
+//print(University.getStudentClass(student: alumno3))
 
-print(University.studentClass(salon: "A"))
+print(University.studentsArray)
+

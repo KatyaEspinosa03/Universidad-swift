@@ -2,7 +2,7 @@ import UIKit
 
 // estructura de los alumnos
 
-struct Students {
+struct Students: Equatable {
     var nombreCompleto: String
     var edad: Int
     var grado: Int
@@ -26,47 +26,71 @@ struct Universidad {
     // eliminar estudiantes
     
     mutating func removeStudents(student: Students){
-        studentsArray.remove(at: 0)
+        if  let index = studentsArray.firstIndex(of: student) {
+            studentsArray.remove(at: index) }
     }
     
-    // obtener el salon del estudiante
+    // obtener el estudiante por salon
     
-    func getStudentClass(student: Students) -> [String] {
-
-        let studentClass = studentsArray.map{_ in student.salon}
-        
-        return studentClass
+    func getStudent(salon: String) -> [Students] {
+    
+        var StudentClassArray:[Students] = []
+        for student in studentsArray {
+            
+            if student.salon == salon {
+                
+                StudentClassArray.append(student)
+                
+            }
         }
-    
+        return StudentClassArray
+    }
     
     }
 
 
-var University = Universidad(studentsArray: [])
+var unam = Universidad(studentsArray: [])
+
+
+
 
 // datos de los alumnos
 
 var alumno1 = Students(nombreCompleto: "Juan Garcia", edad: 18, grado: 3, salon: "A", promedioGeneral: 9.0)
 
-University.students(student: alumno1)
+unam.students(student: alumno1)
 
 
 var alumno2 = Students(nombreCompleto: "Karla Chavez", edad: 15, grado: 1, salon: "C", promedioGeneral: 7.5)
 
-University.students(student: alumno2)
+unam.students(student: alumno2)
 
 var alumno3 = Students(nombreCompleto: "Carlos Torres", edad: 16, grado: 2, salon: "A", telefono: 678795643, promedioGeneral: 8.0)
 
-University.students(student: alumno3)
+unam.students(student: alumno3)
 
 var alumno4 = Students(nombreCompleto: "Sonia Rodriguez", edad: 17, grado: 3, salon: "B", telefono: 559834565, promedioGeneral: 9.5)
-University.students(student: alumno4)
+unam.students(student: alumno4)
+
+var alumno5 = Students(nombreCompleto: "Carlos Sanchez", edad: 16, grado: 2, salon: "B", telefono: 678795643, promedioGeneral: 8.0)
+
+unam.students(student: alumno5)
+
+var groupClassB = unam.getStudent(salon: "B")
+var groupClassA = unam.getStudent(salon: "A")
+var groupClassC = unam.getStudent(salon: "C")
+
+unam.removeStudents(student: alumno1)
+unam.removeStudents(student: alumno3)
+
+print("Este es el grupo B con estos alumnos:\(groupClassB)")
+print("Este es el grupo A con estos alumnos:\(groupClassA)")
+print("Este es el grupo C con estos alumnos:\(groupClassC)")
 
 
 
-University.removeStudents(student: alumno1)
 
-University.getStudentClass(student: alumno3)
+
 
 
 
